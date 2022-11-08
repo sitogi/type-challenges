@@ -2,8 +2,8 @@
 
 import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
+/* [Hello World](https://github.com/type-challenges/type-challenges/blob/main/questions/00013-warm-hello-world/README.md) */
 {
-  /* [Hello World](https://github.com/type-challenges/type-challenges/blob/main/questions/00013-warm-hello-world/README.md) */
   type HelloWorld = any;
 
   type cases = [
@@ -12,8 +12,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ];
 }
 
+/* [Pick](https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.md) */
 {
-  /* [Pick](https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.md) */
   type MyPick<T, K> = any;
 
   type cases = [
@@ -39,8 +39,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   }
 }
 
+/* [Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00007-easy-readonly/README.md) */
 {
-  // [Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00007-easy-readonly/README.md)
   type MyReadonly<T> = any;
 
   type cases = [
@@ -57,8 +57,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   }
 }
 
+/* [Tuple to Object](https://github.com/type-challenges/type-challenges/blob/main/questions/00011-easy-tuple-to-object/README.md) */
 {
-  // [Tuple to Object](https://github.com/type-challenges/type-challenges/blob/main/questions/00011-easy-tuple-to-object/README.md)
   type TupleToObject<T extends readonly any[]> = any
 
   const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const;
@@ -75,8 +75,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   type error = TupleToObject<[[1, 2], {}]>
 }
 
+/* [First of Array](https://github.com/type-challenges/type-challenges/blob/main/questions/00014-easy-first/README.md) */
 {
-  // [First of Array](https://github.com/type-challenges/type-challenges/blob/main/questions/00014-easy-first/README.md)
   type First<T extends any[]> = any
 
   type cases = [
@@ -94,8 +94,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Length of Tuple](https://github.com/type-challenges/type-challenges/blob/main/questions/00018-easy-tuple-length/README.md) */
 {
-  /* [Length of Tuple](https://github.com/type-challenges/type-challenges/blob/main/questions/00018-easy-tuple-length/README.md) */
   type Length<T> = any
 
   const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const;
@@ -111,8 +111,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Exclude](https://github.com/type-challenges/type-challenges/blob/main/questions/00043-easy-exclude/README.md) */
 {
-  /* [Exclude](https://github.com/type-challenges/type-challenges/blob/main/questions/00043-easy-exclude/README.md) */
   type MyExclude<T, U> = any
 
   type cases = [
@@ -122,8 +122,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Awaited](https://github.com/type-challenges/type-challenges/blob/main/questions/00189-easy-awaited/README.md) */
 {
-  /* [Awaited](https://github.com/type-challenges/type-challenges/blob/main/questions/00189-easy-awaited/README.md) */
   type MyAwaited<T> = any
 
   type X = Promise<string>
@@ -142,8 +142,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   type error = MyAwaited<number>
 }
 
+/* [If](https://github.com/type-challenges/type-challenges/blob/main/questions/00268-easy-if/README.md) */
 {
-  /* [If](https://github.com/type-challenges/type-challenges/blob/main/questions/00268-easy-if/README.md) */
   type If<C, T, F> = any
 
   type cases = [
@@ -155,8 +155,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   type error = If<null, 'a', 'b'>
 }
 
+/* [Concat](https://github.com/type-challenges/type-challenges/blob/main/questions/00533-easy-concat/README.md) */
 {
-  /* [Concat](https://github.com/type-challenges/type-challenges/blob/main/questions/00533-easy-concat/README.md) */
   type Concat<T, U> = any
 
   type cases = [
@@ -167,8 +167,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Includes](https://github.com/type-challenges/type-challenges/blob/main/questions/00898-easy-includes/README.md) */
 {
-  /* [Includes](https://github.com/type-challenges/type-challenges/blob/main/questions/00898-easy-includes/README.md) */
   type Includes<T extends readonly any[], U> = any
 
   type cases = [
@@ -191,8 +191,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Push](https://github.com/type-challenges/type-challenges/blob/main/questions/03057-easy-push/README.md) */
 {
-  /* [Push](https://github.com/type-challenges/type-challenges/blob/main/questions/03057-easy-push/README.md) */
   type Push<T, U> = any
 
   type cases = [
@@ -202,8 +202,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Unshift](https://github.com/type-challenges/type-challenges/blob/main/questions/03060-easy-unshift/README.md) */
 {
-  /* [Unshift](https://github.com/type-challenges/type-challenges/blob/main/questions/03060-easy-unshift/README.md) */
   type Unshift<T, U> = any
 
   type cases = [
@@ -213,8 +213,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
   ]
 }
 
+/* [Parameters](https://github.com/type-challenges/type-challenges/blob/main/questions/03312-easy-parameters/README.md) */
 {
-  /* [Parameters](https://github.com/type-challenges/type-challenges/blob/main/questions/03312-easy-parameters/README.md) */
   type MyParameters<T extends (...args: any[]) => any> = any
 
   const foo = (arg1: string, arg2: number): void => {
