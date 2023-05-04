@@ -1,6 +1,6 @@
 // noinspection JSUnusedLocalSymbols
 
-import type { Alike, Equal, Expect } from '@type-challenges/utils';
+import type { Equal, Expect } from '@type-challenges/utils';
 
 /* [Get Return Type](https://github.com/type-challenges/type-challenges/blob/main/questions/00002-medium-return-type/README.md) */
 {
@@ -28,9 +28,10 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
 
 /* [Omit](https://github.com/type-challenges/type-challenges/blob/main/questions/00003-medium-omit/README.md) */
 {
-  type MyOmit<T, K extends keyof T> = {
-    []
+  type MyExclude<T, U> = T extends U ? never : T;
 
+  type MyOmit<T, K extends keyof T> = {
+    [P in MyExclude<keyof T, K>]: T[P];
   };
 
   type cases = [
@@ -56,90 +57,3 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
     title: string;
   }
 }
-
-/* [Readonly 2](https://github.com/type-challenges/type-challenges/blob/main/questions/00008-medium-readonly-2/README.md) */
-{
-  type MyReadonly2<T, K> = any
-
-
-  type cases = [
-    Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
-    Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
-    Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
-  ]
-
-  // @ts-expect-error
-  type error = MyReadonly2<Todo1, 'title' | 'invalid'>
-
-  interface Todo1 {
-    title: string;
-    description?: string;
-    completed: boolean;
-  }
-
-  interface Todo2 {
-    readonly title: string;
-    description?: string;
-    completed: boolean;
-  }
-
-  interface Expected {
-    readonly title: string;
-    readonly description?: string;
-    completed: boolean;
-  }
-}
-
-/* [Deep Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00009-medium-deep-readonly/README.md) */
-{
-  type DeepReadonly<T> = any
-
-  type cases = [Expect<Equal<DeepReadonly<X>, Expected>>];
-
-  type X = {
-    a: () => 22
-    b: string
-    c: {
-      d: boolean
-      e: {
-        g: {
-          h: {
-            i: true
-            j: 'string'
-          }
-          k: 'hello'
-        }
-        l: [
-          'hi',
-          {
-            m: ['hey']
-          },
-        ]
-      }
-    }
-  }
-
-  type Expected = {
-    readonly a: () => 22
-    readonly b: string
-    readonly c: {
-      readonly d: boolean
-      readonly e: {
-        readonly g: {
-          readonly h: {
-            readonly i: true
-            readonly j: 'string'
-          }
-          readonly k: 'hello'
-        }
-        readonly l: readonly [
-          'hi',
-          {
-            readonly m: readonly ['hey']
-          },
-        ]
-      }
-    }
-  }
-}
-
