@@ -1,6 +1,6 @@
 // noinspection JSUnusedLocalSymbols
 
-import type { Equal, Expect } from '@type-challenges/utils';
+import type { Alike, Equal, Expect } from '@type-challenges/utils';
 
 /* [Get Return Type](https://github.com/type-challenges/type-challenges/blob/main/questions/00002-medium-return-type/README.md) */
 {
@@ -55,5 +55,41 @@ import type { Equal, Expect } from '@type-challenges/utils';
 
   interface Expected2 {
     title: string;
+  }
+}
+
+/* [Readonly 2](https://github.com/type-challenges/type-challenges/blob/main/questions/00008-medium-readonly-2/README.md) */
+{
+  type MyReadonly2<T, K extends keyof T = keyof T> = {
+    readonly [P in K]: T[P]
+  } & {
+    [P in Exclude<keyof T, K>]: T[P]
+  };
+
+  type cases = [
+    Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
+    Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
+    Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
+  ]
+
+  // @ts-expect-error
+  type error = MyReadonly2<Todo1, 'title' | 'invalid'>
+
+  interface Todo1 {
+    title: string;
+    description?: string;
+    completed: boolean;
+  }
+
+  interface Todo2 {
+    readonly title: string;
+    description?: string;
+    completed: boolean;
+  }
+
+  interface Expected {
+    readonly title: string;
+    readonly description?: string;
+    completed: boolean;
   }
 }
