@@ -93,3 +93,58 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
     completed: boolean;
   }
 }
+
+/* [Deep Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00009-medium-deep-readonly/README.md) */
+{
+  type DeepReadonly<T> = {
+    readonly [Key in keyof T]: keyof T[Key] extends never ? T[Key] : DeepReadonly<T[Key]>;
+  }
+
+  type cases = [Expect<Equal<DeepReadonly<X>, Expected>>];
+
+  type X = {
+    a: () => 22
+    b: string
+    c: {
+      d: boolean
+      e: {
+        g: {
+          h: {
+            i: true
+            j: 'string'
+          }
+          k: 'hello'
+        }
+        l: [
+          'hi',
+          {
+            m: ['hey']
+          },
+        ]
+      }
+    }
+  }
+
+  type Expected = {
+    readonly a: () => 22
+    readonly b: string
+    readonly c: {
+      readonly d: boolean
+      readonly e: {
+        readonly g: {
+          readonly h: {
+            readonly i: true
+            readonly j: 'string'
+          }
+          readonly k: 'hello'
+        }
+        readonly l: readonly [
+          'hi',
+          {
+            readonly m: readonly ['hey']
+          },
+        ]
+      }
+    }
+  }
+}
