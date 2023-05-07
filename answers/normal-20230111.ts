@@ -155,6 +155,10 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
     [P in T[number]]: unknown;
   };
 
+  // type TupleToUnion<T> = T extends Array<infer U> ? U : never;
+
+  // type TupleToUnion<T extends readonly any[]> = T[number];
+
   type cases = [
     Expect<Equal<TupleToUnion<[123, '456', true]>, 123 | '456' | true>>,
     Expect<Equal<TupleToUnion<[123]>, 123>>,
