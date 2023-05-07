@@ -148,3 +148,15 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
     }
   }
 }
+
+/* [Tuple to Union](https://github.com/type-challenges/type-challenges/blob/main/questions/00010-medium-tuple-to-union/README.md) */
+{
+  type TupleToUnion<T extends readonly any[]> = keyof {
+    [P in T[number]]: unknown;
+  };
+
+  type cases = [
+    Expect<Equal<TupleToUnion<[123, '456', true]>, 123 | '456' | true>>,
+    Expect<Equal<TupleToUnion<[123]>, 123>>,
+  ];
+}
