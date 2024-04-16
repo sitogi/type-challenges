@@ -14,9 +14,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Pick](https://github.com/type-challenges/type-challenges/blob/main/questions/00004-easy-pick/README.md) */
 {
-  type MyPick<T, K extends keyof T> = {
-    [P in K]: T[P];
-  };
+  type MyPick<T, K extends keyof T> = { [key in K]: T[key] };
 
   type cases = [
     Expect<Equal<Expected1, MyPick<Todo, 'title'>>>,
@@ -43,9 +41,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00007-easy-readonly/README.md) */
 {
-  type MyReadonly<T> = {
-    readonly [Key in keyof T]: T[Key];
-  };
+  type MyReadonly<T> = { readonly [key in keyof T]: T[key]};
 
   type cases = [
     Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>,
@@ -63,9 +59,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Tuple to Object](https://github.com/type-challenges/type-challenges/blob/main/questions/00011-easy-tuple-to-object/README.md) */
 {
-  type TupleToObject<T extends readonly PropertyKey[]> = {
-    [P in T[number]]: P;
-  }
+  type TupleToObject<T extends readonly PropertyKey[]> = { [P in T[number]]: P };
 
   const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const;
   const tupleNumber = [1, 2, 3, 4] as const;
@@ -83,7 +77,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [First of Array](https://github.com/type-challenges/type-challenges/blob/main/questions/00014-easy-first/README.md) */
 {
-  type First<T extends unknown[]> = T extends [infer L, ...infer R] ? L : never;
+  type First<T extends any[]> = T extends [infer L,  ...infer R] ? L : never;
 
   type cases = [
     Expect<Equal<First<[3, 2, 1]>, 3>>,
@@ -130,8 +124,8 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Awaited](https://github.com/type-challenges/type-challenges/blob/main/questions/00189-easy-awaited/README.md) */
 {
-  type MyAwaited<T extends Promise<unknown>> = T extends Promise<infer U>
-    ? U extends Promise<unknown> ? MyAwaited<U> : U
+  type MyAwaited<T extends Promise<any>> = T extends Promise<infer A>
+    ? A extends Promise<infer B> ? MyAwaited<A> : A
     : never;
 
   type X = Promise<string>
@@ -165,7 +159,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Concat](https://github.com/type-challenges/type-challenges/blob/main/questions/00533-easy-concat/README.md) */
 {
-  type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
+  type Concat<T extends any[], U extends any[]> = [...T, ...U];
 
   type cases = [
     Expect<Equal<Concat<[], []>, []>>,
@@ -177,9 +171,9 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Includes](https://github.com/type-challenges/type-challenges/blob/main/questions/00898-easy-includes/README.md) */
 {
-  type Includes<T extends readonly unknown[], U> = T extends [infer L, ...infer R]
-    ? Equal<L, U> extends true ? true : Includes<R, U>
-    : false;
+  type Includes<T extends readonly any[], U> = T extends [infer L, ...infer R]
+    ? Equal<L, U> extends  true ? true : Includes<R, U>
+    : false
 
   type cases = [
     Expect<Equal<Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Kars'>, true>>,
@@ -203,7 +197,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Push](https://github.com/type-challenges/type-challenges/blob/main/questions/03057-easy-push/README.md) */
 {
-  type Push<T extends unknown[], U extends unknown> = [...T, U];
+  type Push<T extends any[], U> = [...T, U];
 
   type cases = [
     Expect<Equal<Push<[], 1>, [1]>>,
@@ -214,7 +208,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Unshift](https://github.com/type-challenges/type-challenges/blob/main/questions/03060-easy-unshift/README.md) */
 {
-  type Unshift<T extends unknown[], U> = [U, ...T];
+  type Unshift<T extends any[], U> = [U, ...T];
 
   type cases = [
     Expect<Equal<Unshift<[], 1>, [1]>>,
@@ -225,7 +219,7 @@ import type { Equal, Expect, NotAny } from '@type-challenges/utils';
 
 /* [Parameters](https://github.com/type-challenges/type-challenges/blob/main/questions/03312-easy-parameters/README.md) */
 {
-  type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer P) => any ? P : never;
+  type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer P) => any ? P : [];
 
   const foo = (arg1: string, arg2: number): void => {
   };
