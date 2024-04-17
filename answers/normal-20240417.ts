@@ -4,7 +4,7 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
 
 /* [Get Return Type](https://github.com/type-challenges/type-challenges/blob/main/questions/00002-medium-return-type/README.md) */
 {
-  type MyReturnType<T> = any;
+  type MyReturnType<T> = T extends (...args: any) => infer R ? R : never;
 
   type cases = [
     Expect<Equal<string, MyReturnType<() => string>>>,
