@@ -28,9 +28,10 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
 
 /* [Omit](https://github.com/type-challenges/type-challenges/blob/main/questions/00003-medium-omit/README.md) */
 {
-  type MyOmit<T, K extends keyof T> = {
-    []
+  type MyExclude<T, U> = T extends U ? never : T;
 
+  type MyOmit<T, K extends keyof T> = {
+    [P in MyExclude<keyof T, K>]: T[P];
   };
 
   type cases = [
@@ -59,8 +60,9 @@ import type { Alike, Equal, Expect } from '@type-challenges/utils';
 
 /* [Readonly 2](https://github.com/type-challenges/type-challenges/blob/main/questions/00008-medium-readonly-2/README.md) */
 {
-  type MyReadonly2<T, K> = any
-
+  type MyReadonly2<T, K extends keyof T = keyof T> =
+    { readonly [Key in K]: T[Key] } &
+    { [Key in Exclude<keyof T, K>]: T[Key] }
 
   type cases = [
     Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
